@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЦЕХ 85 - Пекарня • Кофейня</title>
+    <style>
+        :root {
+            --primary-color: #FF0000;
+            --dark-color: #1A1A1A;
+            --light-color: #F5F5F5;
+            --text-color: #333333;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--dark-color);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .desktop-nav {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .desktop-nav button {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .desktop-nav button:hover {
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+        }
+        
+        .mobile-nav {
+            display: none;
+            background-color: var(--dark-color);
+            border-top: 1px solid #444;
+            padding: 15px 0;
+        }
+        
+        .mobile-nav.active {
+            display: block;
+        }
+        
+        .mobile-nav button {
+            display: block;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--white);
+            padding: 10px 0;
+            text-align: left;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .mobile-nav button:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--dark-color), #333);
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero h1 span {
+            color: var(--primary-color);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #e0e0e0;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: #cc0000;
+            transform: scale(1.05);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--white);
+            color: var(--white);
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--dark-color);
+        }
+        
+        .hero-gradient {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to top, var(--dark-color), transparent);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 50px;
+            text-align: center;
+            color: var(--dark-color);
+        }
+        
+        .bg-light {
+            background-color: var(--light-color);
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature svg {
+            margin-right: 10px;
+        }
+        
+        /* Menu Section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .menu-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s;
+        }
+        
+        .menu-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .menu-center {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+        
+        .gallery-item:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            padding: 15px;
+            background-color: var(--light-color);
+        }
+        
+        .gallery-caption p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info h3, .contact-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+        }
+        
+        .contact-item {
+            display: flex;
+            margin-bottom: 25px;
+        }
+        
+        .contact-item svg {
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-item p {
+            margin-bottom: 5px;
+        }
+        
+        .contact-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-item a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hours {
+            margin-top: 30px;
+        }
+        
+        .hours h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
+        }
+        
+        .form-control.error {
+            border-color: #ff4d4d;
+        }
+        
+        .error-message {
+            color: #ff4d4d;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+        
+        .success-message {
+            background-color: #e6ffe6;
+            color: #006600;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background-color: #cc0000;
+        }
+        
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 50px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo h3 {
+            font-size: 1.5rem;
+        }
+        
+        .footer-logo p {
+            color: #aaa;
+            margin-top: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-info {
+            text-align: center;
+        }
+        
+        .footer-info p {
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+        
+        .footer-info a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-info a:hover {
+            color: var(--white);
+        }
+        
+        .footer-divider {
+            margin: 0 10px;
+            color: #666;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s;
+            z-index: 99;
+            border: none;
+        }
+        
+        .back-to-top:hover {
+            background-color: #cc0000;
+            transform: scale(1.1);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            section h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-logo, .social-links {
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .menu-grid, .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                        <path d="M23,8H1c-0.6,0-1,0.4-1,1v1c0,0.6,0.4,1,1,1h3v9c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1v-9h3c0.6,0,1-0.4,1-1v-1C24,8.4,23.6,8,23,8z M6,20H4v-9h2V20z M20,20h-2v-9h2V20z M20,5c0,1.1-0.9,2-2,2H6C4.9,7,4,6.1,4,5s0.9-2,2-2h12C19.1,3,20,3.9,20,5z" />
+                    </svg>
+                    <h1>ЦЕХ 85</h1>
+                </div>
+                
+                <nav class="desktop-nav">
+                    <button onclick="scrollToSection('home')">Главная</button>
+                    <button onclick="scrollToSection('about')">О нас</button>
+                    <button onclick="scrollToSection('menu')">Меню</button>
+                    <button onclick="scrollToSection('gallery')">Галерея</button>
+                    <button onclick="scrollToSection('contact')">Контакты</button>
+                </nav>
+                
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                    </svg>
+                </button>
+            </div>
+            
+            <nav class="mobile-nav" id="mobileNav">
+                <button onclick="scrollToSection('home')">Главная</button>
+                <button onclick="scrollToSection('about')">О нас</button>
+                <button onclick="scrollToSection('menu')">Меню</button>
+                <button onclick="scrollToSection('gallery')">Галерея</button>
+                <button onclick="scrollToSection('contact')">Контакты</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>ПЕКАРНЯ • ЦЕХ <span>85</span></h1>
+            <p>Осторожно! Очень вкусно!</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('menu')">Посмотреть меню</button>
+                <button class="btn btn-outline" onclick="scrollToSection('contact')">Связаться с нами</button>
+            </div>
+        </div>
+        <div class="hero-gradient"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>О нас</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://avatars.dzeninfra.ru/get-zen_doc/4389079/pub_608f0a5bea434d12dfd3d7ce_608f0bc24461ec746caaf8c0/scale_1200" alt="Интерьер кофейни Цех 85">
+                </div>
+                <div class="about-text">
+                    <p>Добро пожаловать в Цех 85 — уникальное пространство, где традиционная выпечка встречается с современной кофейной культурой.</p>
+                    <p>Мы создали Цех 85 с одной целью — подарить вам незабываемые моменты, наполненные ароматом свежеиспеченных булочек и насыщенным вкусом настоящего кофе. Каждый элемент нашего интерьера, каждая деталь меню продуманы до мелочей, чтобы вы чувствовали себя как дома.</p>
+                    <p>Наша команда — это профессионалы, которые с любовью готовят каждый продукт. Мы используем только качественные ингредиенты и следим за каждым этапом приготовления, чтобы вы могли наслаждаться идеальным вкусом.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                <path d="M23,8H1c-0.6,0-1,0.4-1,1v1c0,0.6,0.4,1,1,1h3v9c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1v-9h3c0.6,0,1-0.4,1-1v-1C24,8.4,23.6,8,23,8z M6,20H4v-9h2V20z M20,20h-2v-9h2V20z M20,5c0,1.1-0.9,2-2,2H6C4.9,7,4,6.1,4,5s0.9-2,2-2h12C19.1,3,20,3.9,20,5z" />
+                            </svg>
+                            <span>Свежий кофе ежедневно</span>
+                        </div>
+                        <div class="feature">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                            </svg>
+                            <span>Удобное расположение</span>
+                        </div>
+                        <div class="feature">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                            </svg>
+                            <span>Быстрая доставка</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="bg-light">
+        <div class="container">
+            <h2>Наше меню</h2>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <h3>Кофе</h3>
+                    <ul>
+                        <li class="menu-item">
+                            <span>Американо</span>
+                            <span>250₽</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>Латте</span>
+                            <span>320₽</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>Капучино</span>
+                            <span>300₽</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>Эспрессо</span>
+                            <span>180₽</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>Флэт Уайт</span>
+                            <span>350₽</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="menu-card">
+                    <h3>Выпечка</h3>
+                    <ul>
+                        <li class="menu-item">
+                            <span>Круассан</span>
+                            <span>150₽</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>Пончик</span>
+                            <span>120₽</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>Чизкейк</span>
+                            <span>280₽</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>Торт "Шоколадный"</span>
+                            <span>350₽</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>Пирожное "Наполеон"</span>
+                            <span>220₽</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="menu-card">
+                    <h3>Десерты</h3>
+                    <ul>
+                        <li class="menu-item">
+                            <span>Пудинг</span>
+                            <span>200₽</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>Мороженое</span>
+                            <span>180₽</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>Фруктовый салат</span>
+                            <span>250₽</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>Шоколадный фондант</span>
+                            <span>300₽</span>
+                        </li>
+                        <li class="menu-item">
+                            <span>Чизкейк с ягодами</span>
+                            <span>320₽</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu-center">
+                <button class="btn btn-primary" onclick="scrollToSection('contact')">Заказать доставку</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <div class="container">
+            <h2>Галерея</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://i.pinimg.com/1200x/e8/8c/96/e88c963b93c4ee2f3481b3576e2c9395.jpg" alt="Ароматный кофе в Цехе 85">
+                    <div class="gallery-caption">
+                        <p>Ароматный кофе в Цехе 85</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.pinimg.com/1200x/0d/b0/22/0db022064f230a95ef92df03ab21b26b.jpg" alt="Вкусные десерты и выпечка">
+                    <div class="gallery-caption">
+                        <p>Вкусные десерты и выпечка</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://static.tildacdn.com/tild3566-3430-4564-a534-613862316630/d75_7249-d75_7251.jpg" alt="Уютная атмосфера кофейни">
+                    <div class="gallery-caption">
+                        <p>Уютная атмосфера кофейни</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.pinimg.com/1200x/59/ce/a1/59cea13d7c180f064fc8c2239bd53b4b.jpg" alt="Идеальное место для работы">
+                    <div class="gallery-caption">
+                        <p>Идеальное место для работы</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.pinimg.com/736x/8a/a4/2b/8aa42b38d831397dcdea4568425ed3ab.jpg" alt="Вкусные завтраки и обеды">
+                    <div class="gallery-caption">
+                        <p>Вкусные завтраки и обеды</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-light">
+        <div class="container">
+            <h2>Связаться с нами</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Контактная информация</h3>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
+                        <div>
+                            <p class="font-semibold">Адрес:</p>
+                            <p>г. Санкт-Петербург, ул. Ленина, д. 85</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                        </svg>
+                        <div>
+                            <p class="font-semibold">Телефон:</p>
+                            <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                        <div>
+                            <p class="font-semibold">Email:</p>
+                            <a href="mailto:info@tseh85.ru">info@tseh85.ru</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M14.533 15.582c.733-1.017 1.21-1.873 1.417-2.536.195-.624.168-1.086-.298-1.518-.586-.547-1.336-.367-1.977-.341-.576.023-.825.136-.994.286-.223.197-.245.294-.248.28-.001-.003 0-.007.011-.035.019-.049.028-.059.093-.133.164-.187.33-.296.583-.388.392-.142.71-.234 1.204-.234.693 0 1.193.239 1.526.612.334.374.412.812.428 1.372.031 1.102-.407 2.054-1.002 2.833-.938 1.228-2.215 1.64-3.45 1.582-1.259-.059-2.232-.736-2.747-1.578-.159-.261-.264-.5-.358-.784-.06-.182-.06-.27.008-.349.058-.068.145-.077.227-.06.102.021.177.092.251.185.101.128.18.279.282.452.234.397.49.865.884 1.154.243.178.484.212.758.218.302.007.512-.062.703-.18.203-.125.332-.304.517-.562zm4.05-10.249h-12.404c-.453 0-.82.367-.82.82v12.403c0 .454.367.821.82.821h12.404c.454 0 .821-.367.821-.82v-12.404c0-.453-.367-.82-.82-.82z" />
+                        </svg>
+                        <div>
+                            <p class="font-semibold">ВКонтакте:</p>
+                            <a href="https://vk.com/tseh85" target="_blank">vk.com/tseh85</a>
+                        </div>
+                    </div>
+                    <div class="hours">
+                        <h4>Режим работы:</h4>
+                        <p>Пн-Чт: 8:00 - 22:00</p>
+                        <p>Пт-Сб: 8:00 - 23:00</p>
+                        <p>Вс: 9:00 - 22:00</p>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Напишите нам</h3>
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Имя *</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Ваше имя">
+                            <div class="error-message" id="nameError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Ваш email">
+                            <div class="error-message" id="emailError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение *</label>
+                            <textarea id="message" name="message" rows="5" class="form-control" placeholder="Ваше сообщение"></textarea>
+                            <div class="error-message" id="messageError"></div>
+                        </div>
+                        <button type="submit" class="btn-submit" id="submitBtn">Отправить сообщение</button>
+                        <div class="success-message" id="successMessage" style="display: none;">
+                            Спасибо за ваше сообщение! Мы ответим вам в ближайшее время.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div>
+                        <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                            <path d="M23,8H1c-0.6,0-1,0.4-1,1v1c0,0.6,0.4,1,1,1h3v9c0,0.6,0.4,1,1,1h14c0.6,0,1-0.4,1-1v-9h3c0.6,0,1-0.4,1-1v-1C24,8.4,23.6,8,23,8z M6,20H4v-9h2V20z M20,20h-2v-9h2V20z M20,5c0,1.1-0.9,2-2,2H6C4.9,7,4,6.1,4,5s0.9-2,2-2h12C19.1,3,20,3.9,20,5z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>ЦЕХ 85</h3>
+                        <p>Пекарня • Кофейня • Уютное место</p>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://vk.com/tseh85" target="_blank">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M14.533 15.582c.733-1.017 1.21-1.873 1.417-2.536.195-.624.168-1.086-.298-1.518-.586-.547-1.336-.367-1.977-.341-.576.023-.825.136-.994.286-.223.197-.245.294-.248.28-.001-.003 0-.007.011-.035.019-.049.028-.059.093-.133.164-.187.33-.296.583-.388.392-.142.71-.234 1.204-.234.693 0 1.193.239 1.526.612.334.374.412.812.428 1.372.031 1.102-.407 2.054-1.002 2.833-.938 1.228-2.215 1.64-3.45 1.582-1.259-.059-2.232-.736-2.747-1.578-.159-.261-.264-.5-.358-.784-.06-.182-.06-.27.008-.349.058-.068.145-.077.227-.06.102.021.177.092.251.185.101.128.18.279.282.452.234.397.49.865.884 1.154.243.178.484.212.758.218.302.007.512-.062.703-.18.203-.125.332-.304.517-.562zm4.05-10.249h-12.404c-.453 0-.82.367-.82.82v12.403c0 .454.367.821.82.821h12.404c.454 0 .821-.367.821-.82v-12.404c0-.453-.367-.82-.82-.82z" />
+                        </svg>
+                    </a>
+                    <a href="#">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </a>
+                </div>
+                
+                <div class="footer-info">
+                    <p>&copy; <span id="currentYear"></span> Цех 85. Все права защищены.</p>
+                    <div>
+                        <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                        <span class="footer-divider">|</span>
+                        <a href="mailto:info@tseh85.ru">info@tseh85.ru</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="scrollToTop()" aria-label="Вернуться наверх">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" />
+        </svg>
+    </button>
+
+    <script>
+        // Установка текущего года в футере
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Функция для переключения мобильного меню
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+        }
+        
+        // Функция для плавной прокрутки к секции
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const elementPosition = element.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: elementPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Закрываем мобильное меню после клика
+                const mobileNav = document.getElementById('mobileNav');
+                mobileNav.classList.remove('active');
+            }
+        }
+        
+        // Функция для прокрутки наверх
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Функция для валидации email
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        // Обработчик отправки формы
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Получаем значения формы
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // Сбрасываем предыдущие ошибки
+            document.getElementById('nameError').textContent = '';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('messageError').textContent = '';
+            document.getElementById('name').classList.remove('error');
+            document.getElementById('email').classList.remove('error');
+            document.getElementById('message').classList.remove('error');
+            
+            // Валидация
+            let hasErrors = false;
+            
+            if (!name) {
+                document.getElementById('nameError').textContent = 'Имя обязательно для заполнения';
+                document.getElementById('name').classList.add('error');
+                hasErrors = true;
+            }
+            
+            if (!email) {
+                document.getElementById('emailError').textContent = 'Email обязателен для заполнения';
+                document.getElementById('email').classList.add('error');
+                hasErrors = true;
+            } else if (!validateEmail(email)) {
+                document.getElementById('emailError').textContent = 'Некорректный email адрес';
+                document.getElementById('email').classList.add('error');
+                hasErrors = true;
+            }
+            
+            if (!message) {
+                document.getElementById('messageError').textContent = 'Сообщение обязательно для заполнения';
+                document.getElementById('message').classList.add('error');
+                hasErrors = true;
+            }
+            
+            if (hasErrors) {
+                return;
+            }
+            
+            // Имитация отправки формы
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+            
+            setTimeout(() => {
+                // Сброс формы
+                document.getElementById('contactForm').reset();
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Отправить сообщение';
+                
+                // Показать сообщение об успехе
+                const successMessage = document.getElementById('successMessage');
+                successMessage.style.display = 'block';
+                
+                // Скрыть сообщение через 3 секунды
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            }, 1500);
+        }
+        
+        // Показать/скрыть кнопку "Наверх" при прокрутке
+        window.addEventListener('scroll', function() {
+            const backToTopBtn = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopBtn.style.display = 'flex';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
